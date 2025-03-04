@@ -1,0 +1,31 @@
+{
+  "name": "pogo-search",
+  "version": "1.0.0",
+  "description": "Pokemon GO search term strings to clean your storage",
+  "main": "generateSearchString.js",
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "gen:database": "node database/updateDatabase.js -f",
+    "gen:database:cache": "node database/updateDatabase.js",
+    "gen:strings": "node generateSearchString.js",
+    "gen:all": "npm run gen:database && npm run gen:strings",
+    "gen:all:cache": "npm run gen:database:cache && npm run gen:strings"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zebiano/pogo-search.git"
+  },
+  "keywords": [],
+  "author": "Sebastião Barros (@Zebiano)",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/Zebiano/pogo-search/issues"
+  },
+  "homepage": "https://github.com/Zebiano/pogo-search#readme",
+  "dependencies": {
+    "node-html-parser": "^7.0.1"
+  }
+}
