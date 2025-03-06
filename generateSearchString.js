@@ -27,19 +27,15 @@ if (!existsSync('result.json')) {
 
 /**
  * Array of Pokemon that should be considered as exceptions.
- * For example, Slowbro is an F-tier for Water and Psychic attacks. However, Galarian Slowbro is a B-tier in Posion.
- * However, there's no way to differentiate between them in search terms (// TODO: are you sure?).
+ * For example, Slowbro is an F-tier for Water and Psychic attacks. However, Galarian Slowbro is a B-tier in Poison.
+ * Unfortunately, there's no way to differentiate between them in search terms (// TODO: are you sure?).
  * Because of this, Pokemon that are part of this list will not // TODO
  */
 // const exceptions = ['Slowbro']
 
-// FIXME: Slowbro should appear as a TopGym, but does not
-
-// const maxPokemonPerTier = 1 // TODO: For this to work, I need to know the tier list order with shadows and megas and etc all in one, not separated arrays. So instead, I should save results.json in an array of objects, with the name and form inside.
 const pokemonNames = JSON.parse(readFileSync(`result.json`, 'utf8'));
 const allPokemon = { positive: { shadow: [], mega: [], rest: [], gym: [] }, negative: { shadow: [], mega: [], rest: [], gym: [] } }
 
-let count = 0
 // Create organized array of Pokemon names
 for (let type in pokemonNames) {
   if (type == 'gym') {
@@ -74,8 +70,8 @@ for (let type in pokemonNames) {
 }
 
 const searchStrings = {
-  positive: { shadow: 'shadow&', mega: 'mega0-&', rest: '!shadow,!mega0-&', gym: '' },
-  negative: { shadow: 'shadow&', mega: 'mega0-&', rest: '!shadow,!mega0-&', gym: '' }
+  positive: { shadow: 'shadow&', mega: '!shadow&', rest: '!shadow,!mega0-&', gym: '' },
+  negative: { shadow: 'shadow&', mega: '!shadow&', rest: '!shadow,!mega0-&', gym: '' }
 }
 
 // Create search strings from arrays
