@@ -27,11 +27,16 @@ if (!existsSync('result.json')) {
 
 /**
  * Array of Pokemon that should be considered as exceptions.
- * For example, Slowbro is an F-tier for Water and Psychic attacks. However, Galarian Slowbro is a B-tier in Poison.
+ * Example, Slowbro is an F-tier for Water and Psychic attacks. However, Galarian Slowbro is a B-tier in Poison.
  * Unfortunately, there's no way to differentiate between them in search terms (// TODO: are you sure?).
- * Because of this, Pokemon that are part of this list will not // TODO
  */
 // const exceptions = ['Slowbro']
+
+/**
+ * Array of Pokemon whose evolution line should not be considered.
+ * Example: '+Mewtwo' also shows Mew, which is not a Top Pokemon.
+ */
+const ignoreEvolutionLine = ['Mewtwo']
 
 const pokemonNames = JSON.parse(readFileSync(`result.json`, 'utf8'));
 const allPokemon = { positive: { shadow: [], mega: [], rest: [], gym: [] }, negative: { shadow: [], mega: [], rest: [], gym: [] } }
@@ -41,30 +46,30 @@ for (let type in pokemonNames) {
   if (type == 'gym') {
     // Join all gym pokemon
     for (let pokemon of pokemonNames[type]['any']) {
-      allPokemon.positive.gym.push(`+${pokemon}`)
-      allPokemon.negative.gym.push(`!+${pokemon}`)
+      allPokemon.positive.gym.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.gym.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
   } else {
     // Join all 'normal' and 'other' forms
     for (let pokemon of pokemonNames[type]['default']) {
-      allPokemon.positive.rest.push(`+${pokemon}`)
-      allPokemon.negative.rest.push(`!+${pokemon}`)
+      allPokemon.positive.rest.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.rest.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
     for (let pokemon of pokemonNames[type]['other']) {
-      allPokemon.positive.rest.push(`+${pokemon}`)
-      allPokemon.negative.rest.push(`!+${pokemon}`)
+      allPokemon.positive.rest.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.rest.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
 
     // Join all 'shadow' forms
     for (let pokemon of pokemonNames[type]['shadow']) {
-      allPokemon.positive.shadow.push(`+${pokemon}`)
-      allPokemon.negative.shadow.push(`!+${pokemon}`)
+      allPokemon.positive.shadow.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.shadow.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
 
     // Join all 'mega' forms
     for (let pokemon of pokemonNames[type]['mega']) {
-      allPokemon.positive.mega.push(`+${pokemon}`)
-      allPokemon.negative.mega.push(`!+${pokemon}`)
+      allPokemon.positive.mega.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.mega.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
   }
 }
