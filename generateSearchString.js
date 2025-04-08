@@ -34,12 +34,12 @@ if (!existsSync('result.json')) {
 
 /**
  * Array of Pokemon whose evolution line should not be considered.
- * Example: '+Mewtwo' also shows Mew, which is not a Top Pokemon.
+ * Example: '+Mewtwo' also shows Mew, which is not a Top Pokemon. However, they are an exception, as Mew cannot evolve into Mewtwo.
  */
 const ignoreEvolutionLine = ['Mewtwo']
 
 const pokemonNames = JSON.parse(readFileSync(`result.json`, 'utf8'));
-const allPokemon = { positive: { shadow: [], mega: [], rest: [], gym: [] }, negative: { shadow: [], mega: [], rest: [], gym: [] } }
+const allPokemon = { positive: { shadow: [], mega: [], other: [], gym: [] }, negative: { shadow: [], mega: [], other: [], gym: [] } }
 
 // Create organized array of Pokemon names
 for (let type in pokemonNames) {
@@ -52,12 +52,12 @@ for (let type in pokemonNames) {
   } else {
     // Join all 'normal' and 'other' forms
     for (let pokemon of pokemonNames[type]['default']) {
-      allPokemon.positive.rest.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
-      allPokemon.negative.rest.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.positive.other.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.other.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
     for (let pokemon of pokemonNames[type]['other']) {
-      allPokemon.positive.rest.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
-      allPokemon.negative.rest.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.positive.other.push(`${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
+      allPokemon.negative.other.push(`!${ignoreEvolutionLine.includes(pokemon) ? '' : '+'}${pokemon}`)
     }
 
     // Join all 'shadow' forms
@@ -75,19 +75,19 @@ for (let type in pokemonNames) {
 }
 
 const searchStrings = {
-  positive: { shadow: 'shadow&', mega: '!shadow&', rest: '!shadow,!mega0-&', gym: '' },
-  negative: { shadow: 'shadow&', mega: '!shadow&', rest: '!shadow,!mega0-&', gym: '' }
+  positive: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' },
+  negative: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' }
 }
 
 // Create search strings from arrays
 searchStrings.positive.shadow += allPokemon.positive.shadow.join(',')
 searchStrings.positive.mega += allPokemon.positive.mega.join(',')
-searchStrings.positive.rest += allPokemon.positive.rest.join(',')
+searchStrings.positive.type += allPokemon.positive.other.join(',')
 searchStrings.positive.gym += allPokemon.positive.gym.join(',')
 
 searchStrings.negative.shadow += allPokemon.negative.shadow.join('&')
 searchStrings.negative.mega += allPokemon.negative.mega.join('&')
-searchStrings.negative.rest += allPokemon.negative.rest.join('&')
+searchStrings.negative.type += allPokemon.negative.other.join('&')
 searchStrings.negative.gym += allPokemon.negative.gym.join('&')
 
 // Save final search strings result to file
