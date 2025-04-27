@@ -15,12 +15,15 @@
  * Positive search strings are STs that only show those pokemon
  */
 
-import { writeFileSync, readFileSync, existsSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 if (!existsSync('result.json')) {
   console.log("No 'result.json' file found!")
   process.exit()
 }
+
+// Search strings that are not dynamic
+const trashSafest = '!TopShadow&!TopMega&!TopType&!TopGym&!legendary&!mythical&!ultrabeast&!shiny&!dynamax&!gigantamax&!xxs&!xxl&!year2016-2018&distance-100&!costume&!eggsonly&!@special&!4*&!favorite&!evolvenew&!purified&!lucky&!event&!background'
 
 // ICEBOX: Create "that one" ST, with a bit margin of error, but that lazy people want to use who don't care much
 // ICEBOX: Create "slightly less error prone" ST by not including shadow, megas and other forms, as people can take care of those individually
@@ -76,7 +79,8 @@ for (let type in pokemonNames) {
 
 const searchStrings = {
   positive: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' },
-  negative: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' }
+  negative: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' },
+  cleaning: { safest: trashSafest }
 }
 
 // Create search strings from arrays
