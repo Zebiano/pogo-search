@@ -8,11 +8,11 @@
     "node": "22"
   },
   "scripts": {
+    "gen:all": "npm run gen:database && npm run gen:strings",
+    "gen:all:cache": "npm run gen:database:cache && npm run gen:strings",
     "gen:database": "node database/updateDatabase.js -f",
     "gen:database:cache": "node database/updateDatabase.js",
-    "gen:strings": "node generateSearchString.js",
-    "gen:all": "npm run gen:database && npm run gen:strings",
-    "gen:all:cache": "npm run gen:database:cache && npm run gen:strings"
+    "gen:strings": "node generateSearchString.js"
   },
   "repository": {
     "type": "git",

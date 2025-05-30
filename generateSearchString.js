@@ -23,7 +23,7 @@ if (!existsSync('result.json')) {
 }
 
 // Search strings that are not dynamic
-const trashSafest = '!TopShadow&!TopMega&!TopType&!TopGym&!legendary&!mythical&!ultrabeast&!shiny&!dynamax&!gigantamax&!xxs&!xxl&!year2016-2018&distance-100&!costume&!eggsonly&!@special&!4*&!favorite&!evolvenew&!purified&!lucky&!event&!background'
+const trashSafest = '!TopShadow&!TopMega&!TopType&!TopGym&!legendary&!mythical&!ultrabeast&!shiny&!dynamax&!gigantamax&!xxs&!xxl&!year2016-2018&distance-100&!costume&!eggsonly&!@special&!4*&!favorite&!evolvenew&!purified&!lucky&!background'
 
 // ICEBOX: Create "that one" ST, with a bit margin of error, but that lazy people want to use who don't care much
 // ICEBOX: Create "slightly less error prone" ST by not including shadow, megas and other forms, as people can take care of those individually
@@ -78,8 +78,8 @@ for (let type in pokemonNames) {
 }
 
 const searchStrings = {
-  positive: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' },
-  negative: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '' },
+  positive: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '!shadow&' },
+  negative: { shadow: 'shadow&', mega: '!shadow&', type: '!shadow,!mega0-&', gym: '!shadow&' },
   cleaning: { safest: trashSafest }
 }
 
