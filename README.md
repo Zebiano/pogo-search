@@ -104,7 +104,7 @@ It filters out Pokemon that:
 ## Exceptions
 
 The Pokemon world is quite complex, and there are a few exceptions needed, as well as some hand-picked fixes:
-- **Mew & Mewtwo** - PoGO shows both Mew and Mewtwo when using `+Mew` or `+Mewtwo`. However, it's not possible to evolve Mew into Mewtwo and Mew isalso  significantly weaker than Mewtwo. Because of this, Mew is being filtered out by hand.
+- **Mew & Mewtwo** - PoGO shows both Mew and Mewtwo when using `+Mew` or `+Mewtwo`. However, it's not possible to evolve Mew into Mewtwo and Mew is also  significantly weaker than Mewtwo. Because of this, Mew is being filtered out manually.
 - **Eevees** are a very specific use case, as there are so many evolutions that are all differently strong or weak. The search term strings do not take this into consideration (yet), and will consider any Eevee evolution as a Top Pokemon.
 - Frosslass is wrongly being considered a Top Mega Pokemon due to Glalie.
 - Many Pokemon that have other "variants", like Alolan or Hisuian, can be wrongly tagged as a top type. Examples include Golem, Typhlosion, etc.
