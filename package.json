@@ -8,7 +8,8 @@
     "node": "22"
   },
   "scripts": {
-    "scraper": "tsx src/scraper.ts",
+    "scraper": "cd src/scraper && npm run scraper",
+    "parser": "tsx src/parser.ts",
     "gen:all": "npm run gen:database && npm run gen:strings",
     "gen:all:cache": "npm run gen:database:cache && npm run gen:strings",
     "gen:database": "node database/updateDatabase.js -f",
@@ -27,8 +28,6 @@
   },
   "homepage": "https://github.com/Zebiano/pogo-search#readme",
   "dependencies": {
-    "node-html-parser": "^7.1.0",
-    "puppeteer": "^24.42.0",
     "tsx": "^4.21.0"
   },
   "devDependencies": {
