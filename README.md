@@ -2,6 +2,9 @@
 
 Pokemon GO search term strings to ease cleaning your Pokemon storage.
 
+> [!IMPORTANT]
+> The project is undergoing core changes, expect more and better PoGO Search Strings soon!
+
 ## Why? <!-- omit in toc -->
 
 Because I needed a faster and reliable way of cleaning my Pokemon storage.
